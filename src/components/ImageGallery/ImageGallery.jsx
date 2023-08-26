@@ -1,11 +1,9 @@
-import ImageGalleryItem from 'components/ImageGalleryItem/ImageGalleryItem';
+// import ImageGalleryItem from 'components/ImageGalleryItem/ImageGalleryItem';
 
 const ImageGallery = () => {
   return (
     <div>
-      <ul class="gallery">
-        <ImageGalleryItem />
-      </ul>
+      <ul>{/* <ImageGalleryItem /> */}</ul>
     </div>
   );
 };
