@@ -19,9 +19,7 @@ export class App extends Component {
     });
   };
 
-  // .slice(13, searchQuery.length)
-
-  componentDidUpdate = async (prevProps, prevState) => {
+  componentDidUpdate = async (_, prevState) => {
     if (
       prevState.searchQuery !== this.state.searchQuery ||
       prevState.page !== this.state.page
