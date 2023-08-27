@@ -1,13 +1,17 @@
-// const ImageGalleryItem = newGallery => {
-//   return (
-//     <div>
-//       <li>
-//         {newGallery.map(galleryItem => {
-//           return <img src="" alt="" />;
-//         })}
-//       </li>
-//     </div>
-//   );
-// };
+const ImageGalleryItem = images => {
+  return (
+    <div>
+      <li key={id}>
+        {images.map(({ id, webformatURL }) => {
+          return (
+            <>
+              <img src={webformatURL} alt="" />;
+            </>
+          );
+        })}
+      </li>
+    </div>
+  );
+};
 
-// export default ImageGalleryItem;
+export default ImageGalleryItem;

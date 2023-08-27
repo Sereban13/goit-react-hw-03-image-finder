@@ -1,44 +1,72 @@
 import { Component } from 'react';
 import { getImages } from 'services/api';
-// import axios from 'axios';
+import ImageGallery from './ImageGallery/ImageGallery';
+import BtnLoadMore from './Button/Button';
 
-const ArticleList = ({ images }) => (
-  <ul>
-    {images.map(({ id, webformatURL }) => (
-      <li key={id}>
-        <img src={webformatURL} alt="title" />
-      </li>
-    ))}
-  </ul>
-);
 export class App extends Component {
   state = {
+    searchQuery: '',
     images: [],
     isLoading: false,
+    page: 1,
   };
 
-  async componentDidMount() {
-    this.setState({ isLoading: true });
-    try {
-      // const response = await axios.get(
-      //   `/?q=cat&page=1&key=${API_KEY}&image_type=photo&orientation=horizontal&per_page=12`
-      // );
-      const response = await getImages();
-      this.setState({ images: response.data.hits });
-    } catch (error) {
-      this.setState({ error });
-    } finally {
-      this.setState({ isLoading: false });
+  hangleChange = newQuery => {
+    this.setState({
+      searchQuery: `${Date.now()}/${newQuery}`,
+      images: [],
+      page: 1,
+    });
+  };
+
+  // .slice(13, searchQuery.length)
+
+  componentDidUpdate = async (prevProps, prevState) => {
+    if (
+      prevState.searchQuery !== this.state.searchQuery ||
+      prevState.page !== this.state.page
+    ) {
+      const { searchQuery, page } = this.state;
+      this.setState({ isLoading: true });
+      try {
+        const imgColection = await getImages(searchQuery, page);
+        this.setState({ images: [...prevState.images, ...imgColection] });
+      } catch (error) {
+        this.setState({ error });
+      } finally {
+        this.setState({ isLoading: false });
+      }
     }
-  }
+  };
+
+  handleSubmit = async event => {
+    event.preventDefault();
+    this.hangleChange(event.target.elements.query.value);
+    event.target.reset();
+  };
+
+  handleBtnMore = async () => {
+    this.setState(prevState => ({
+      page: prevState.page + 1,
+    }));
+  };
 
   render() {
     const { images, isLoading, error } = this.state;
     return (
       <div>
+        <div>
+          <form onSubmit={this.handleSubmit}>
+            <input type="text" name="query" />
+            <button type="submit">Search</button>
+          </form>
+        </div>
+
         {error && <p>Whoops, something went wrong: {error.message}</p>}
         {isLoading && <p>Loading...</p>}
-        {images.length > 0 && <ArticleList images={images} />}
+        {images.length > 0 && <ImageGallery images={images} />}
+
+        <BtnLoadMore clickLoadMore={this.handleBtnMore} />
       </div>
     );
   }
