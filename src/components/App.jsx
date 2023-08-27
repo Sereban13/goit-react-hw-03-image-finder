@@ -19,16 +19,17 @@ export class App extends Component {
     });
   };
 
-  componentDidUpdate = async prevState => {
-    if (
-      prevState.searchQuery !== this.state.searchQuery ||
-      prevState.page !== this.state.page
-    ) {
-      const { searchQuery, page } = this.state;
-      this.setState({ isLoading: true });
+  // .slice(13, searchQuery.length)
+
+  componentDidUpdate = async (prevProps, prevState) => {
+    const { searchQuery, page } = this.state;
+    if (prevState.searchQuery !== searchQuery || prevState.page !== page) {
       try {
-        const imgColection = await getImages(searchQuery, page);
-        this.setState({ images: [...prevState.images, ...imgColection] });
+        this.setState({ isLoading: true });
+        const response = await getImages(searchQuery, page);
+        this.setState(prevState => ({
+          images: [...prevState.images, ...response.data.hits],
+        }));
       } catch (error) {
         this.setState({ error });
       } finally {
