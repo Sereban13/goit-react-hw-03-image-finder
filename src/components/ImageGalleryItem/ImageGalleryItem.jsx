@@ -14,4 +14,4 @@ const ImageGalleryItem = images => {
   );
 };
 
-export default ImageGalleryItem;
+// export default ImageGalleryItem;

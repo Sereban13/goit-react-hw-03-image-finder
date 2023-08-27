@@ -19,7 +19,7 @@ export class App extends Component {
     });
   };
 
-  componentDidUpdate = async (_, prevState) => {
+  componentDidUpdate = async prevState => {
     if (
       prevState.searchQuery !== this.state.searchQuery ||
       prevState.page !== this.state.page
