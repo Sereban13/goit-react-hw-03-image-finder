@@ -2,6 +2,7 @@ import { Component } from 'react';
 import { getImages } from 'services/api';
 import ImageGallery from './ImageGallery/ImageGallery';
 import BtnLoadMore from './Button/Button';
+import Searchbar from './Searchbar/Searchbar';
 
 export class App extends Component {
   state = {
@@ -40,7 +41,9 @@ export class App extends Component {
 
   handleSubmit = async event => {
     event.preventDefault();
-    this.hangleChange(event.target.elements.query.value);
+    const inputValue = event.target.elements.query.value;
+
+    this.hangleChange(inputValue);
     event.target.reset();
   };
 
@@ -54,12 +57,13 @@ export class App extends Component {
     const { images, isLoading, error } = this.state;
     return (
       <div>
-        <div>
+        <Searchbar submit={this.handleSubmit} />
+        {/* <div>
           <form onSubmit={this.handleSubmit}>
             <input type="text" name="query" />
             <button type="submit">Search</button>
           </form>
-        </div>
+        </div> */}
 
         {error && <p>Whoops, something went wrong: {error.message}</p>}
         {isLoading && <p>Loading...</p>}

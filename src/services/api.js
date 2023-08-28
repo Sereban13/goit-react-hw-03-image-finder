@@ -25,9 +25,3 @@ async function getImages(searchQuery, page) {
 }
 
 export { getImages };
-
-// await getImages(searchQuery, page).then(response =>
-//   this.setState(prevState => ({
-//     images: [...prevState.images, ...response.data.hits],
-//   }))
-// );
