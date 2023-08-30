@@ -42,7 +42,6 @@ export class App extends Component {
   handleSubmit = async event => {
     event.preventDefault();
     const inputValue = event.target.elements.query.value;
-
     this.hangleChange(inputValue);
     event.target.reset();
   };
@@ -58,12 +57,6 @@ export class App extends Component {
     return (
       <div>
         <Searchbar submit={this.handleSubmit} />
-        {/* <div>
-          <form onSubmit={this.handleSubmit}>
-            <input type="text" name="query" />
-            <button type="submit">Search</button>
-          </form>
-        </div> */}
 
         {error && <p>Whoops, something went wrong: {error.message}</p>}
         {isLoading && <p>Loading...</p>}

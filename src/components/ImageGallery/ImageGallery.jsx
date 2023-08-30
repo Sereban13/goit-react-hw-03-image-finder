@@ -1,13 +1,15 @@
-// import ImageGalleryItem from 'components/ImageGalleryItem/ImageGalleryItem';
+import { ImageGalleryItem } from 'components/ImageGalleryItem/ImageGalleryItem';
 
 const ImageGallery = ({ images }) => {
   return (
     <ul>
-      {images.map(({ id, webformatURL }) => (
-        <li key={id}>
-          <img src={webformatURL} alt="title" />
-        </li>
-      ))}
+      {images.map(image => {
+        return (
+          <div>
+            <ImageGalleryItem imgItem={image} />
+          </div>
+        );
+      })}
     </ul>
   );
 };
