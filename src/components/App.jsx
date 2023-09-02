@@ -3,6 +3,7 @@ import { getImages } from 'services/api';
 import ImageGallery from './ImageGallery/ImageGallery';
 import BtnLoadMore from './Button/Button';
 import Searchbar from './Searchbar/Searchbar';
+import { GlobalStyle } from './GlobalStyled';
 
 export class App extends Component {
   state = {
@@ -63,6 +64,7 @@ export class App extends Component {
         {images.length > 0 && <ImageGallery images={images} />}
 
         <BtnLoadMore clickLoadMore={this.handleBtnMore} />
+        <GlobalStyle />
       </div>
     );
   }

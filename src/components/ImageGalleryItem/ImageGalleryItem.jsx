@@ -12,12 +12,14 @@ export class ImageGalleryItem extends Component {
   closeModal = () => this.setState({ isModalOpen: false });
 
   render() {
-    const { id, webformatURL, tags, largeImageURL } = this.props.imgItem;
+    const {
+      imgItem: { webformatURL, tags, largeImageURL },
+    } = this.props;
     const { isModalOpen } = this.state;
     return (
-      <div>
-        <li key={id} onClick={this.openModal}>
-          <img src={webformatURL} alt={tags} />;
+      <>
+        <li key={this.props.imgItem.id} onClick={this.openModal}>
+          <img src={webformatURL} alt={tags} />
         </li>
         <Modal
           isOpen={isModalOpen}
@@ -26,7 +28,7 @@ export class ImageGalleryItem extends Component {
         >
           <img src={largeImageURL} alt={tags} />
         </Modal>
-      </div>
+      </>
     );
   }
 }

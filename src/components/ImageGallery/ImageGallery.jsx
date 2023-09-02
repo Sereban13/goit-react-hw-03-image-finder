@@ -5,9 +5,9 @@ const ImageGallery = ({ images }) => {
     <ul>
       {images.map(image => {
         return (
-          <div>
+          <>
             <ImageGalleryItem imgItem={image} />
-          </div>
+          </>
         );
       })}
     </ul>
