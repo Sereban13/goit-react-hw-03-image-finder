@@ -1,8 +1,10 @@
+import { BtnLoad } from './Button.Styled';
+
 const BtnLoadMore = ({ clickLoadMore }) => {
   return (
-    <button type="butoon" onClick={clickLoadMore}>
+    <BtnLoad type="butoon" onClick={clickLoadMore}>
       Load more
-    </button>
+    </BtnLoad>
   );
 };
 

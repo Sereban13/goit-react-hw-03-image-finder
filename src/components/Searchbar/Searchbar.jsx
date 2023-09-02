@@ -1,11 +1,13 @@
+import { StyledSearch, SearchForm, BtnSubmit, Input } from './Searchbar.Styled';
+
 const Searchbar = ({ submit }) => {
   return (
-    <div>
-      <form onSubmit={submit}>
-        <input type="text" name="query" />
-        <button type="submit">Search</button>
-      </form>
-    </div>
+    <StyledSearch>
+      <SearchForm onSubmit={submit}>
+        <Input type="text" name="query" />
+        <BtnSubmit type="submit">Search</BtnSubmit>
+      </SearchForm>
+    </StyledSearch>
   );
 };
 

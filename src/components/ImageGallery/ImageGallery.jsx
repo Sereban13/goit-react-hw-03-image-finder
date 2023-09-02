@@ -1,8 +1,9 @@
 import { ImageGalleryItem } from 'components/ImageGalleryItem/ImageGalleryItem';
+import { GalleryList } from './ImageGallery.Styled';
 
 const ImageGallery = ({ images }) => {
   return (
-    <ul>
+    <GalleryList>
       {images.map(image => {
         return (
           <>
@@ -10,7 +11,7 @@ const ImageGallery = ({ images }) => {
           </>
         );
       })}
-    </ul>
+    </GalleryList>
   );
 };
 export default ImageGallery;

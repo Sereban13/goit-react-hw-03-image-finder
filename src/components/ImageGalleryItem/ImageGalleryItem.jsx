@@ -1,5 +1,5 @@
 import { Component } from 'react';
-
+import { ImgGalletyItem } from './ImageGalleryItem.Styled';
 import Modal from 'react-modal';
 
 Modal.setAppElement('#root');
@@ -15,12 +15,13 @@ export class ImageGalleryItem extends Component {
     const {
       imgItem: { webformatURL, tags, largeImageURL },
     } = this.props;
+
     const { isModalOpen } = this.state;
     return (
       <>
-        <li key={this.props.imgItem.id} onClick={this.openModal}>
+        <ImgGalletyItem key={this.props.imgItem.id} onClick={this.openModal}>
           <img src={webformatURL} alt={tags} />
-        </li>
+        </ImgGalletyItem>
         <Modal
           isOpen={isModalOpen}
           onRequestClose={this.closeModal}

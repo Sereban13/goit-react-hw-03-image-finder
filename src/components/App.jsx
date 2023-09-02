@@ -4,6 +4,7 @@ import ImageGallery from './ImageGallery/ImageGallery';
 import BtnLoadMore from './Button/Button';
 import Searchbar from './Searchbar/Searchbar';
 import { GlobalStyle } from './GlobalStyled';
+import { AppSection } from './App.Style';
 
 export class App extends Component {
   state = {
@@ -56,7 +57,7 @@ export class App extends Component {
   render() {
     const { images, isLoading, error } = this.state;
     return (
-      <div>
+      <AppSection>
         <Searchbar submit={this.handleSubmit} />
 
         {error && <p>Whoops, something went wrong: {error.message}</p>}
@@ -65,7 +66,7 @@ export class App extends Component {
 
         <BtnLoadMore clickLoadMore={this.handleBtnMore} />
         <GlobalStyle />
-      </div>
+      </AppSection>
     );
   }
 }
