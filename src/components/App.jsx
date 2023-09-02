@@ -5,6 +5,9 @@ import BtnLoadMore from './Button/Button';
 import Searchbar from './Searchbar/Searchbar';
 import { GlobalStyle } from './GlobalStyled';
 import { AppSection } from './App.Style';
+import toast from 'react-hot-toast';
+
+// const notify = () => toast('Enter your request please.');
 
 export class App extends Component {
   state = {
@@ -12,6 +15,7 @@ export class App extends Component {
     images: [],
     isLoading: false,
     page: 1,
+    // totalHits: 0,
   };
 
   hangleChange = newQuery => {
@@ -21,8 +25,9 @@ export class App extends Component {
       page: 1,
     });
   };
-
-  // .slice(13, searchQuery.length)
+  componentDidMount = () => {
+    toast('Enter your request please.');
+  };
 
   componentDidUpdate = async (prevProps, prevState) => {
     const { searchQuery, page } = this.state;
@@ -32,6 +37,7 @@ export class App extends Component {
         const response = await getImages(searchQuery, page);
         this.setState(prevState => ({
           images: [...prevState.images, ...response.data.hits],
+          // totalHits: response.data.totalHits,
         }));
       } catch (error) {
         this.setState({ error });
@@ -41,7 +47,7 @@ export class App extends Component {
     }
   };
 
-  handleSubmit = async event => {
+  handleSubmit = event => {
     event.preventDefault();
     const inputValue = event.target.elements.query.value;
     this.hangleChange(inputValue);
@@ -56,6 +62,7 @@ export class App extends Component {
 
   render() {
     const { images, isLoading, error } = this.state;
+
     return (
       <AppSection>
         <Searchbar submit={this.handleSubmit} />
@@ -64,7 +71,12 @@ export class App extends Component {
         {isLoading && <p>Loading...</p>}
         {images.length > 0 && <ImageGallery images={images} />}
 
-        <BtnLoadMore clickLoadMore={this.handleBtnMore} />
+        {images.length === 0 ? (
+          <></>
+        ) : (
+          <BtnLoadMore clickLoadMore={this.handleBtnMore} />
+        )}
+
         <GlobalStyle />
       </AppSection>
     );
