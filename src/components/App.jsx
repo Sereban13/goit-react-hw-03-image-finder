@@ -15,10 +15,10 @@ export class App extends Component {
     images: [],
     isLoading: false,
     page: 1,
-    // totalHits: 0,
+    totalHits: 0,
   };
 
-  hangleChange = newQuery => {
+  handleChange = newQuery => {
     this.setState({
       searchQuery: `${Date.now()}/${newQuery}`,
       images: [],
@@ -37,7 +37,7 @@ export class App extends Component {
         const response = await getImages(searchQuery, page);
         this.setState(prevState => ({
           images: [...prevState.images, ...response.data.hits],
-          // totalHits: response.data.totalHits,
+          totalHits: response.data.totalHits,
         }));
       } catch (error) {
         this.setState({ error });
@@ -47,13 +47,6 @@ export class App extends Component {
     }
   };
 
-  handleSubmit = event => {
-    event.preventDefault();
-    const inputValue = event.target.elements.query.value;
-    this.hangleChange(inputValue);
-    event.target.reset();
-  };
-
   handleBtnMore = async () => {
     this.setState(prevState => ({
       page: prevState.page + 1,
@@ -61,17 +54,17 @@ export class App extends Component {
   };
 
   render() {
-    const { images, isLoading, error } = this.state;
+    const { images, isLoading, error, page, totalHits } = this.state;
 
     return (
       <AppSection>
-        <Searchbar submit={this.handleSubmit} />
+        <Searchbar submit={this.handleChange} />
 
         {error && <p>Whoops, something went wrong: {error.message}</p>}
         {isLoading && <p>Loading...</p>}
         {images.length > 0 && <ImageGallery images={images} />}
 
-        {images.length === 0 ? (
+        {images.length === 0 || page >= totalHits / 150 ? (
           <></>
         ) : (
           <BtnLoadMore clickLoadMore={this.handleBtnMore} />

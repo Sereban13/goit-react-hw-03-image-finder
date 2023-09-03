@@ -16,8 +16,14 @@ const modalStyles = {
     zIndex: '1200',
   },
   content: {
-    maxWidth: 'calc(100vw - 48px)',
-    maxHeight: 'calc(100vh - 24px)',
+    maxWidth: 'calc(100vw - 36px)',
+    maxHeight: 'calc(100vh - 12px)',
+    top: '50%',
+    left: '50%',
+    right: 'auto',
+    bottom: 'auto',
+    marginRight: '-50%',
+    transform: 'translate(-50%, -50%)',
   },
 };
 
