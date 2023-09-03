@@ -64,7 +64,7 @@ export class App extends Component {
         {isLoading && <p>Loading...</p>}
         {images.length > 0 && <ImageGallery images={images} />}
 
-        {images.length === 0 || page >= totalHits / 150 ? (
+        {images.length === 0 || page >= totalHits / 12 ? (
           <></>
         ) : (
           <BtnLoadMore clickLoadMore={this.handleBtnMore} />

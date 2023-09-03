@@ -7,7 +7,7 @@ async function getImages(searchQuery, page) {
   const query = searchQuery.slice(14, searchQuery.length);
 
   const response = await axios.get(
-    `/?q=${query}&page=${page}&key=${API_KEY}&image_type=photo&orientation=horizontal&per_page=150`
+    `/?q=${query}&page=${page}&key=${API_KEY}&image_type=photo&orientation=horizontal&per_page=12`
   );
   return response;
 }
